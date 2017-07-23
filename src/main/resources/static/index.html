@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理系统</title>
+    <link rel="stylesheet" type="text/css" href="easyUI/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
+    <script type="text/javascript" src="easyUI/jquery.min.js"></script>
+    <script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
+    <style type="text/css">
+        body {
+            font-family: verdana, helvetica, arial, sans-serif;
+            padding: 20px;
+            font-size: 12px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="easyui-layout">
+<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">后台管理系统</div>
+<div data-options="region:'west',split:true,title:'菜单'" style="width:200px;">
+    <div class="easyui-accordion" id="menu">
+
+
+        <div title="权限管理">
+            <p>Content1</p>
+        </div>
+        <div title="任务管理">
+            <p>Content2</p>
+        </div>
+        <div title="个人中心">
+
+        </div>
+    </div>
+
+</div>
+<div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">east region
+</div>
+<div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">south region</div>
+<div id="main" class="easyui-tabs" data-options="region:'center'">
+    <div title="Home">
+
+    </div>
+</div>
+<script type="application/javascript">
+    $(function () {
+
+
+        var menuList = {
+            "title1": [{name: "菜单名称", url: "http://www.baidu.com"}, {name: "菜单名称2", url: "index.html"}],
+            "title2": [{name: "菜单名称", url: "http://www.baidu.com"}, {name: "菜单名称2", url: "index.html"}]
+        };
+
+//        $.getJSON("#",function (data) {
+        var menuInfo = $("#menu");
+//            menuInfo.html("");
+        var data = menuList;
+        $.each(data, function (key, value) {
+            var moduleMenu = '';
+            $.each(value, function (i, item) {
+                moduleMenu = moduleMenu + '<a class="menuItem easyui-linkbutton" href="#" url="' + item.url + '">' + item.name + '</a>';
+            });
+            menuInfo.accordion("add", {
+                title: key,
+                content: moduleMenu
+            });
+        })
+//        })
+        $(".menuItem").click(function () {
+            var title = $(this).text();
+            var url = $(this).attr("url");
+
+            addTab(title, url);
+        });
+        function addTab(title, url) {
+            var main = $("#main");
+            if (main.tabs("exists", title)) {
+                main.tabs("select", title);
+                return;
+            }
+            main.tabs('add', {
+                title: title,
+                content: '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>',
+                closable: true
+            });
+        }
+    });
+</script>
+</body>
+</html>
