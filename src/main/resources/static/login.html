@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登录界面</title>
+    <meta charset="UTF-8">
+    <link href="css/login.css" rel='stylesheet' type='text/css' />
+    <!--//webfonts-->
+    <script src="easyUI/jquery.min.js"></script>
+</head>
+<body>
+<script>$(document).ready(function(c) {
+    $('.close').on('click', function(c){
+        $('.login-form').fadeOut('slow', function(c){
+            $('.login-form').remove();
+        });
+    });
+});
+</script>
+<!--SIGN UP-->
+<div class="login-form">
+    <div class="close"> </div>
+    <div class="head-info">
+        <label class="lbl-1"> </label>
+        <label class="lbl-2"> </label>
+        <label class="lbl-3"> </label>
+    </div>
+    <div class="clear"> </div>
+    <div class="avtar">
+        <img src="images/avtar.png" />
+    </div>
+    <form action="index.html" method="post">
+        <input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
+        <div class="key">
+            <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+        </div>
+        <div class="signin">
+            <input type="submit" value="Login" >
+        </div>
+    </form>
+
+</div>
+<div class="copy-rights">
+    <p>Copyright &copy; 2015.Company name All rights reserved.</p>
+</div>
+
+</body>
+</html>
