@@ -14,6 +14,32 @@
             font-size: 12px;
             margin: 0;
         }
+
+        .icon {
+            width: 18px;
+            line-height: 18px;
+            display: inline-block;
+            padding-left: 5px;
+        }
+
+        .nav-list {
+            list-style-type: none;
+            margin: 0px;
+            padding: 10px;
+            line-height: 18px;
+        }
+        .menuItem{
+            font-size: 13px;
+            text-decoration: none;
+            color: black;
+            padding-bottom: 0;
+            line-height: 28px;
+        }
+        li {
+            display: list-item;
+            text-align: -webkit-match-parent;
+
+        }
     </style>
 </head>
 <body class="easyui-layout">
@@ -47,7 +73,10 @@
 
 
         var menuList = {
-            "title1": [{name: "菜单名称", url: "http://www.baidu.com"}, {name: "菜单名称2", url: "index.html"}],
+            "title1": [{name: "菜单名称", url: "http://www.baidu.com", icon: 'icon-add'}, {
+                name: "菜单名称2",
+                url: "index.html"
+            }],
             "title2": [{name: "菜单名称", url: "http://www.baidu.com"}, {name: "菜单名称2", url: "index.html"}]
         };
 
@@ -56,9 +85,9 @@
 //            menuInfo.html("");
         var data = menuList;
         $.each(data, function (key, value) {
-            var moduleMenu = '';
+            var moduleMenu = '<ul class="nav-list">';
             $.each(value, function (i, item) {
-                moduleMenu = moduleMenu + '<a class="menuItem easyui-linkbutton" href="#" url="' + item.url + '">' + item.name + '</a>';
+                moduleMenu = moduleMenu + '<li><span class="icon ' + item.icon + '">&nbsp;</span><a class="menuItem" href="#" url="' + item.url + '">' + item.name + '</a></li>';
             });
             menuInfo.accordion("add", {
                 title: key,
