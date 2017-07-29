@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->
+<mapper namespace="com.bizi.backend.permit.dao.SysUserDao"><!-- 若不需要自动返回主键，将useGeneratedKeys="true" keyProperty="id"去掉即可(当然如果不需要自动返回主键，直接用注解即可) -->
+    <resultMap id="sysUserMap" type="SysUser">
+        <result column="id" property="id" javaType="INTEGER"/>
+        <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="last_login_time" property="lastLoginTime" jdbcType="TIME"/>
+        <result column="last_login_ip" property="last_login_ip" jdbcType="VARCHAR"/>
+        <result column="valid_flag" property="validFlag" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createDate" jdbcType="TIME"/>
+        <result column="modifier" property="modifier" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIME"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="queryCond">
+        <where>
+            <if test="type!=null and type!=''" >
+                and type=#{type}
+            </if>
+            <if test="status!=null and status!=''">
+                and status=#{status}
+            </if>
+            <if test="reporter!=null and reporter!=''">
+                and reporter=#{reporter}
+            </if>
+            <if test="startDate!=null and startDate!=''">
+                <![CDATA[and create_date >= #{startDate}
+        ]]>
+            </if>
+            <if test="endDate!=null and endDate!=''">
+                <![CDATA[and create_date <= #{endDate}
+        ]]>
+            </if>
+        </where>
+    </sql>
+    <select id="query" parameterType="SysUserCond" resultMap="sysUserMap">
+        select * from bug_report
+        <include refid="queryCond"/>
+        limit #{start},#{limit}
+    </select>
+    <select id="count" parameterType="SysUserCond" resultType="java.lang.Integer">
+        select count(1) from bug_report
+        <include refid="queryCond"/>
+    </select>
+    <update id="update" parameterType="SysUser">
+        update bug_report
+        <set>
+            <if test="type!=null">
+                type=#{type},
+            </if>
+            <if test="menu!=null">
+                menu=#{menu},
+            </if>
+            <if test="description!=null">
+                description=#{description},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="remark!=null">
+                remark=#{remark},
+            </if>
+            <if test="true">
+                modify_date=now(),
+            </if>
+            <if test="modifier!=null">
+                modifier=#{modifier},
+            </if>
+        </set>
+        where id=#{id} and reporter=#{reporter}
+    </update>
+</mapper>

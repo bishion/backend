@@ -7,29 +7,42 @@
     <link rel="stylesheet" type="text/css" href="../easyUI/themes/icon.css">
     <script type="text/javascript" src="../easyUI/jquery.min.js"></script>
     <script type="text/javascript" src="../easyUI/jquery.easyui.min.js"></script>
+
 </head>
-<body>
-<table class="easyui-datagrid" title="用户信息维护" style="width:700px;height:250px"
-       data-options="rownumbers:true,singleSelect:true,method:'get',toolbar:'#toolbar'">
+<body class="easyui-layout">
+<div data-options="region:'north',split:true,collapsed:false" title="查询区" style="height:100px;">
 
-</table>
-<div id="toolbar" style="padding:5px;height:auto">
-    <span style="margin-bottom:5px">
-        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
-    </span>
-    <span style="float: right;">
-        <input class="easyui-searchbox" data-options="prompt:'Please Input Value',searcher:doSearch" style="width:200px">
-    </span>
-    
+    <form id="query" method="post">
+        <table cellpadding="5">
+            <tr>
+                <td width="50">登录名:</td>
+                <td><input class="easyui-textbox" type="text" name="loginName"></td>
+                <td>姓名:</td>
+                <td><input class="easyui-textbox" type="text" name="username"></td>
+                <td>状态:</td>
+                <td><select class="easyui-combobox" name="status" panelHeight="auto">
+                    <option value="" selected>所有</option>
+                    <option value="1">有效</option>
+                    <option value="0">无效</option>
+                </select></td>
+
+                <td>上次登录时间:</td>
+                <td><input name="starDate" class="easyui-datebox" data-options="formatter:dateFormatter,parser:dateParser">
+                    -<input name="endDate" class="easyui-datebox" data-options="formatter:dateFormatter,parser:dateParser">
+                </td>
+                <td><a href="javascript:(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
+                    <button type="reset" class="easyui-linkbutton">Clear</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
 </div>
-<script type="application/javascript">
-    function doSearch() {
-
-    }
-</script>
+<div data-options="region:'center',border:false">
+    <table id="grid">
+    </table>
+</div>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/permit/sysUser.js"></script>
 </body>
 </html>
