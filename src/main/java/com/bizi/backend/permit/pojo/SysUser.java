@@ -11,6 +11,4 @@ public class SysUser extends BasePojo{
     private String username;
     private String loginName;
     private String password;
-    private String lastLoginTime;
-    private String lastLoginIp;
 }

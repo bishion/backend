@@ -11,7 +11,7 @@ public abstract class BasePojo {
     private String modifier;
     private Date createTime;
     private Date modifyTime;
-    private String validFlag;
+    private Integer validFlag;
     private String remark;
 
     public Integer getId() {
@@ -54,11 +54,11 @@ public abstract class BasePojo {
         this.modifyTime = modifyTime;
     }
 
-    public String getValidFlag() {
+    public Integer getValidFlag() {
         return validFlag;
     }
 
-    public void setValidFlag(String validFlag) {
+    public void setValidFlag(Integer validFlag) {
         this.validFlag = validFlag;
     }
 

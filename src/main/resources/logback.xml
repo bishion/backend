@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <property name="LOG_DIR" value="/home/bishion/backend/logs" />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoder charset="UTF-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name ="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_DIR}/daily.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_DIR}/daily-%d{yyyy-MM-dd}-%i.log
+            </FileNamePattern>
+            <MaxHistory>365</MaxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>100MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder charset="UTF-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root>
+        <level value="INFO" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="File" />
+    </root>
+
+    <logger name="com.apach.ibatis" level="DEBUG" />
+    <logger name="java.sql" level="DEBUG" />
+
+
+</configuration>
