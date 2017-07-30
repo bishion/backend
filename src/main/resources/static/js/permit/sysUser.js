@@ -1,7 +1,8 @@
 var baseContextPath = "../../user/";
 var query = baseContextPath + "query.json";
 $(function () {
-    $("#grid").datagrid({
+    var grid = $("#grid");
+    grid.datagrid({
         title: "结果区",
         url:query,
         singleSelect: false,
@@ -32,7 +33,9 @@ $(function () {
         ]]
     });
     $("#query").click(function () {
-
+        // grid.datagrid('load').url = query;
+        // grid.load($("#queryForm").serialize());
+        grid.datagrid("load", $("#queryForm").serializeArray());
     })
 });
 
