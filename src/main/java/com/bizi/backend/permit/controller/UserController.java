@@ -34,7 +34,10 @@ public class UserController {
     @RequestMapping("query.json")
     public BasePage<List<SysUser>> query(SysUserCond cond){
         List<SysUser> list = new ArrayList<>(1);
-        list.add(new SysUser());
+        SysUser sysUser = new SysUser();
+        sysUser.setLoginName("bizi");
+        sysUser.setUsername("bizi");
+        list.add(sysUser);
         BasePage<List<SysUser>> result = new BasePage<>();
         result.setTotal(1);
         result.setRows(list);

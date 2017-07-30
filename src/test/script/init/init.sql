@@ -4,8 +4,6 @@ CREATE TABLE `sys_user` (
   `login_name` varchar(255) NOT NULL DEFAULT '' COMMENT '登录名',
   `password` varchar(255) NOT NULL DEFAULT '' COMMENT '密码',
   `username` varchar(255) NOT NULL DEFAULT '' COMMENT '用户姓名',
-  `last_login_time` datetime DEFAULT NULL,
-  `last_login_ip` varchar(15) NOT NULL DEFAULT '未登录',
   `valid_flag` varchar(255) NOT NULL DEFAULT '' COMMENT '状态：1有效；0无效',
   `creator` varchar(255) NOT NULL DEFAULT '' COMMENT '创建者',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',

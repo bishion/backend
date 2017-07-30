@@ -3,10 +3,10 @@ var query = baseContextPath + "query.json";
 $(function () {
     $("#grid").datagrid({
         title: "结果区",
-        url: query,
+        url:query,
         singleSelect: false,
         pagination: true,
-        method: "get",
+        method: "post",
         toolbar: [
             {
                 text: "新增", iconCls: 'icon-add', handler: function () {
@@ -31,6 +31,9 @@ $(function () {
             {field: "creator", title: '创建人'}
         ]]
     });
+    $("#query").click(function () {
+
+    })
 });
 
 function submitForm() {

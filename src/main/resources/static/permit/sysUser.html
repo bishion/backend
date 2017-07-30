@@ -12,7 +12,7 @@
 <body class="easyui-layout">
 <div data-options="region:'north',split:true,collapsed:false" title="查询区" style="height:100px;">
 
-    <form id="query" method="post">
+    <form id="queryForm" method="post">
         <table cellpadding="5">
             <tr>
                 <td width="50">登录名:</td>
@@ -30,7 +30,7 @@
                 <td><input name="starDate" class="easyui-datebox" data-options="formatter:dateFormatter,parser:dateParser">
                     -<input name="endDate" class="easyui-datebox" data-options="formatter:dateFormatter,parser:dateParser">
                 </td>
-                <td><a href="javascript:(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
+                <td><a id="query" href="javascript:(0)" class="easyui-linkbutton">Submit</a>
                     <button type="reset" class="easyui-linkbutton">Clear</button>
                 </td>
             </tr>
