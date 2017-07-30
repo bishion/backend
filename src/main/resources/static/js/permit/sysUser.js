@@ -1,6 +1,9 @@
+var baseContextPath = "../../user/";
+var query = baseContextPath + "query.json";
 $(function () {
     $("#grid").datagrid({
         title: "结果区",
+        url: query,
         singleSelect: false,
         pagination: true,
         method: "get",
@@ -14,9 +17,7 @@ $(function () {
                 text: "重置密码", iconCls: 'icon-edit', handler: function () {
 
             }
-            },
-            {
-                text: "删除", iconCls: 'icon-add', handler: function () {
+            },{text: "删除", iconCls: 'icon-add', handler: function () {
 
             }
             }
@@ -34,9 +35,9 @@ $(function () {
 
 function submitForm() {
     alert("test");
-    $("#query").form('submit',{
-        url:'http://www.baidu.com',
-        success:function (data) {
+    $("#query").form('submit', {
+        url: query,
+        success: function (data) {
             alert("teset")
         }
     });
