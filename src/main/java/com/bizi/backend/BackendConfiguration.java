@@ -10,6 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
+import org.springframework.web.context.request.RequestContextListener;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 
@@ -18,7 +23,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @MapperScan("com.bizi.backend.*.dao")
-public class BackendConfiguration {
+public class BackendConfiguration extends WebMvcConfigurerAdapter{
     @Value("${database.url}")
     private String url;
     @Value("${database.username}")
@@ -45,10 +50,31 @@ public class BackendConfiguration {
         SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
         fb.setDataSource(dataSource);//指定数据源(这个必须有，否则报错)
         //下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
-        fb.setTypeAliasesPackage("com.bizi.backend");//指定基包,不支持通配符
+        fb.setTypeAliasesPackage("com.bizi.backend.permit");//指定基包,不支持通配符
         fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));//指定xml文件位置
 
         return fb.getObject();
     }
-
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new SecurityInterceptor()).excludePathPatterns("/login/*","/error","/commonTask/*");
+    }
+  /*  @Bean
+    public RequestContextListener requestContextListener(){
+        RequestContextListener requestContextListener = new RequestContextListener();
+        return requestContextListener;
+    }
+    @Bean
+    public ThreadPoolTaskExecutor threadPoolTaskExecutor(){
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setCorePoolSize(10);
+        threadPoolTaskExecutor.setMaxPoolSize(50);
+        threadPoolTaskExecutor.setQueueCapacity(1000);
+        threadPoolTaskExecutor.setKeepAliveSeconds(300);
+        return threadPoolTaskExecutor;
+    }
+    @Bean
+    public SchedulerFactoryBean schedulerFactoryBean(){
+        return new SchedulerFactoryBean();
+    }*/
 }

@@ -4,6 +4,7 @@ import com.bizi.backend.permit.cond.SysUserCond;
 import com.bizi.backend.permit.pojo.SysUser;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -13,7 +14,9 @@ import java.util.List;
 public interface SysUserDao {
 
     List<SysUser> query(SysUserCond cond);
-
+    int count(SysUserCond cond);
+    void update(SysUser sysUser);
+    void create(SysUser sysUser);
     @Select("Select * from sys_user where login_name=#{loginName} and password=#{password} and valid_flag=1")
     SysUser login(@Param("loginName") String loginName, @Param("password") String password);
 }

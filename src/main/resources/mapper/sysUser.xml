@@ -6,24 +6,28 @@
         <result column="id" property="id" javaType="INTEGER"/>
         <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
-        <result column="valid_flag" property="validFlag" jdbcType="TINYINT"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
         <result column="create_time" property="createDate" jdbcType="TIME"/>
         <result column="modifier" property="modifier" jdbcType="VARCHAR"/>
-        <result column="creator" property="creator" jdbcType="VARCHAR"/>
         <result column="modify_time" property="modifyTime" jdbcType="TIME"/>
+        <result column="valid_flag" property="validFlag" jdbcType="TINYINT"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <insert id="create" parameterType="SysUser">
+        INSERT into sys_user(id,login_name,password,username,creator,create_time,modifier,modify_time,valid_flag,remark)
+        VALUES(null,#{loginName},#{password},#{username},#{operator},now(),#{operator},now(),1,#{remark})
+    </insert>
     <sql id="queryCond">
         <where>
-            <if test="type!=null and type!=''" >
-                and type=#{type}
+            <if test="validFlag!=null" >
+                and valid_flag = #{validFlag}
             </if>
-            <if test="status!=null and status!=''">
-                and status=#{status}
+            <if test="loginName!=null and loginName!=''">
+                and login_name like "%"#{loginName}"%"
             </if>
-            <if test="reporter!=null and reporter!=''">
-                and reporter=#{reporter}
+            <if test="username!=null and username!=''">
+                and username like "%"#{username}"%"
             </if>
             <if test="startDate!=null and startDate!=''">
                 <![CDATA[and create_date >= #{startDate}
@@ -36,7 +40,7 @@
         </where>
     </sql>
     <select id="query" parameterType="SysUserCond" resultMap="sysUserMap">
-        select * from bug_report
+        select * from sys_user
         <include refid="queryCond"/>
         limit #{start},#{limit}
     </select>
@@ -47,28 +51,25 @@
     <update id="update" parameterType="SysUser">
         update bug_report
         <set>
-            <if test="type!=null">
+            <if test="validFlag!=null">
                 type=#{type},
             </if>
-            <if test="menu!=null">
-                menu=#{menu},
+            <if test="username!=null">
+                username=#{username},
             </if>
-            <if test="description!=null">
-                description=#{description},
-            </if>
-            <if test="status!=null">
-                status=#{status},
+            <if test="loginName!=null">
+                login_name=#{loginName},
             </if>
             <if test="remark!=null">
                 remark=#{remark},
             </if>
             <if test="true">
-                modify_date=now(),
+                modify_time=now(),
             </if>
-            <if test="modifier!=null">
-                modifier=#{modifier},
+            <if test="operator!=null">
+                modifier=#{operator},
             </if>
         </set>
-        where id=#{id} and reporter=#{reporter}
+        where id=#{id}
     </update>
 </mapper>
