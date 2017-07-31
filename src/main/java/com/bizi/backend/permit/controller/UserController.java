@@ -1,13 +1,9 @@
 package com.bizi.backend.permit.controller;
 
-import com.bizi.backend.bases.BaseAssert;
-import com.bizi.backend.bases.BaseExpMsgEnum;
-import com.bizi.backend.bases.BasePage;
 import com.bizi.backend.bases.BaseResult;
 import com.bizi.backend.permit.cond.SysUserCond;
 import com.bizi.backend.permit.dao.SysUserDao;
 import com.bizi.backend.permit.pojo.SysUser;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,19 +22,19 @@ public class UserController {
 
     @RequestMapping("/login")
     public SysUser login(String loginName,String password){
-        BaseAssert.isTrue(StringUtils.isAnyBlank(loginName,password), BaseExpMsgEnum.BASE_PARAM_ERROR);
+//        BaseAssert.isTrue(StringUtils.isAnyBlank(loginName,password), BaseExpMsgEnum.BASE_PARAM_ERROR);
         sysUserDao.login(loginName,password);
 
-        return null;
+        return new SysUser();
     }
     @RequestMapping("query.json")
-    public BasePage<List<SysUser>> query(SysUserCond cond){
+    public BaseResult<SysUser> query(SysUserCond cond){
         List<SysUser> list = new ArrayList<>(1);
         SysUser sysUser = new SysUser();
         sysUser.setLoginName("bizi");
         sysUser.setUsername("bizi");
         list.add(sysUser);
-        BasePage<List<SysUser>> result = new BasePage<>();
+        BaseResult<SysUser> result = new BaseResult(list);
         result.setTotal(1);
         result.setRows(list);
         return result;

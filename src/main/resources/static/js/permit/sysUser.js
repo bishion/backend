@@ -1,5 +1,5 @@
 var baseContextPath = "../../user/";
-var query = baseContextPath + "query.json";
+var query = baseContextPath + "login";
 $(function () {
     var grid = $("#grid");
     grid.datagrid({
@@ -30,11 +30,16 @@ $(function () {
             {field: "lastLoginIp", title: '上次登录IP'},
             {field: "createTime", title: '创建时间'},
             {field: "creator", title: '创建人'}
-        ]]
+        ]],
+        onLoadSuccess:function (data) {
+            if(!data.success){
+                $.messager.alert("error","test");
+                return false;
+            }
+        }
     });
     $("#query").click(function () {
-        // grid.datagrid('load').url = query;
-        // grid.load($("#queryForm").serialize());
+
         grid.datagrid("load", $("#queryForm").serializeArray());
     })
 });
