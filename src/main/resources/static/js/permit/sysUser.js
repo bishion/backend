@@ -8,6 +8,7 @@ $(function () {
         singleSelect: false,
         pagination: true,
         method: "post",
+        fit:true,
         toolbar: [
             {
                 text: "新增", iconCls: 'icon-add', handler: function () {
