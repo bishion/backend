@@ -1,6 +1,7 @@
 package com.bizi.backend.framework;
 
 import com.bizi.backend.bases.BaseConst;
+import com.bizi.backend.bases.BaseResult;
 import com.bizi.backend.permit.pojo.SysUser;
 
 import javax.annotation.Resource;
@@ -31,5 +32,12 @@ public abstract class BaseController {
 
     private static SysUser getLoginUser(HttpSession session){
         return (SysUser) session.getAttribute(BaseConst.SESSION_LOGIN_INFO);
+    }
+    protected BaseResult buildSuccess(){
+        return new BaseResult();
+    }
+
+    protected BaseResult buildFail(String message){
+        return new BaseResult(false,message);
     }
 }

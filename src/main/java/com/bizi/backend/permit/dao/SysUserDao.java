@@ -19,4 +19,7 @@ public interface SysUserDao {
     void create(SysUser sysUser);
     @Select("Select * from sys_user where login_name=#{loginName} and password=#{password} and valid_flag=1")
     SysUser login(@Param("loginName") String loginName, @Param("password") String password);
+
+    @Update("update sys_user set valid_flag=0,modify_time=now(),modifier=#{operator}")
+    void delete(@Param("id") int id,@Param("operator")String operator);
 }

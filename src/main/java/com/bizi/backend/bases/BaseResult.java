@@ -12,22 +12,19 @@ import java.util.List;
 @Setter
 @Getter
 public class BaseResult<T> {
-    private boolean success = false;
+    private boolean success;
     private String message;
     private T value;
+    public BaseResult(){
+        this.success = true;
+    }
     public BaseResult(T value){
         this.success = true;
         this.value = value;
     }
     public BaseResult(boolean success,String message){
+        this.success = success;
         this.message = message;
     }
-    // 分页专用
-    private List<T> rows = Collections.EMPTY_LIST;
-    private int total = 0;
 
-    public BaseResult(List<T> rows){
-        this.success = true;
-        this.rows = rows;
-    }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
-    <property name="LOG_DIR" value="/home/bishion/backend/logs" />
+    <property name="LOG_DIR" value="/Users/liuhong/Technology/workspace" />
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <target>System.out</target>
         <encoder charset="UTF-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->

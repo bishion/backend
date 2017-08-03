@@ -2,6 +2,8 @@ package com.bizi.backend.permit.service;
 
 import com.bizi.backend.bases.BaseException;
 import com.bizi.backend.bases.BaseExpMsgEnum;
+import com.bizi.backend.bases.PageDTO;
+import com.bizi.backend.permit.cond.SysUserCond;
 import com.bizi.backend.permit.dao.SysUserDao;
 import com.bizi.backend.permit.pojo.SysUser;
 import org.springframework.stereotype.Service;
@@ -22,5 +24,25 @@ public class SysUserService {
             throw new BaseException(BaseExpMsgEnum.LOGIN_INFO_ERROR);
         }
         return sysUser;
+    }
+
+    public PageDTO<SysUser> query(SysUserCond sysUserCond){
+        int total = sysUserDao.count(sysUserCond);
+        if(total>0){
+            return new PageDTO<>(total,sysUserDao.query(sysUserCond));
+        }
+        return new PageDTO<>();
+    }
+
+
+    public void update(SysUser sysUser) {
+        sysUserDao.update(sysUser);
+    }
+    public void create(SysUser sysUser) {
+        sysUserDao.create(sysUser);
+    }
+
+    public void delete(int id,String operator) {
+        sysUserDao.delete(id,operator);
     }
 }
