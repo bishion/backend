@@ -1,5 +1,5 @@
 var baseContextPath = "../../user/";
-var query = baseContextPath + "login";
+var query = baseContextPath + "query";
 $(function () {
     var grid = $("#grid");
     grid.datagrid({
@@ -40,17 +40,6 @@ $(function () {
         }
     });
     $("#query").click(function () {
-
         grid.datagrid("load", $("#queryForm").serializeArray());
     })
 });
-
-function submitForm() {
-    alert("test");
-    $("#query").form('submit', {
-        url: query,
-        success: function (data) {
-            alert("teset")
-        }
-    });
-}
