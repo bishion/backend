@@ -30,8 +30,8 @@
                 <td><input name="starDate" class="easyui-datebox" data-options="formatter:dateFormatter,parser:dateParser">
                     -<input name="endDate" class="easyui-datebox" data-options="formatter:dateFormatter,parser:dateParser">
                 </td>
-                <td><a id="query" href="javascript:(0)" class="easyui-linkbutton">Submit</a>
-                    <button type="reset" class="easyui-linkbutton">Clear</button>
+                <td><a id="query" href="javascript:(0)" class="easyui-linkbutton">查询</a>
+                    <button type="reset" class="easyui-linkbutton">重置</button>
                 </td>
             </tr>
         </table>
@@ -39,8 +39,26 @@
 
 </div>
 <div data-options="region:'center',border:false">
-    <table id="grid">
+    <table id="grid"></table>
+</div>
+<div id="dialog" class="easyui-dialog" style="width:300px;height:200px;padding: 10px 20px;" closed="true" buttons="#dlg-buttons">
+
+<form id="editForm" method="post">
+    <table>
+        <tr>
+            <td>姓名:</td>
+            <td><input name="username" class="f1 easyui-textbox" data-options="required:true"></td>
+        </tr>
+        <tr>
+            <td>登录名:</td>
+            <td><input name="loginName" class="f1 easyui-textbox" data-options="required:true"></td>
+        </tr>
     </table>
+</form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" id="save" style="width:90px">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog').dialog('close')" style="width:90px">Cancel</a>
 </div>
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/permit/sysUser.js"></script>

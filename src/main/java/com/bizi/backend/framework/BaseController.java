@@ -31,13 +31,17 @@ public abstract class BaseController {
     }
 
     private static SysUser getLoginUser(HttpSession session){
-        return (SysUser) session.getAttribute(BaseConst.SESSION_LOGIN_INFO);
+//        SysUser sysUser = (SysUser) session.getAttribute(BaseConst.SESSION_LOGIN_INFO)
+        SysUser sysUser = new SysUser();// TODO: 测试用,免登录
+        sysUser.setLoginName("system");
+        sysUser.setUsername("管理员");
+        return sysUser;
     }
     protected BaseResult buildSuccess(){
         return new BaseResult();
     }
 
     protected BaseResult buildFail(String message){
-        return new BaseResult(false,message);
+        return new BaseResult(message);
     }
 }

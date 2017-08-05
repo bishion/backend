@@ -1,11 +1,13 @@
 package com.bizi.backend.permit.service;
 
+import com.bizi.backend.bases.BaseConst;
 import com.bizi.backend.bases.BaseException;
 import com.bizi.backend.bases.BaseExpMsgEnum;
 import com.bizi.backend.bases.PageDTO;
 import com.bizi.backend.permit.cond.SysUserCond;
 import com.bizi.backend.permit.dao.SysUserDao;
 import com.bizi.backend.permit.pojo.SysUser;
+import com.bizi.backend.utils.SecurityUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,8 +40,9 @@ public class SysUserService {
     public void update(SysUser sysUser) {
         sysUserDao.update(sysUser);
     }
-    public void create(SysUser sysUser) {
-        sysUserDao.create(sysUser);
+    public void insert(SysUser sysUser) {
+        sysUser.setPassword(SecurityUtil.md5Enc(BaseConst.ORIGINAL_PASSWORD));
+        sysUserDao.insert(sysUser);
     }
 
     public void delete(int id,String operator) {

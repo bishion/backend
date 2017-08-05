@@ -11,16 +11,15 @@ import java.util.List;
  */
 @Setter
 @Getter
-public class BaseResult<T> {
+public class BaseResult {
     private boolean success;
     private String message;
-    private T value;
     public BaseResult(){
         this.success = true;
     }
-    public BaseResult(T value){
-        this.success = true;
-        this.value = value;
+    public BaseResult(String message){
+        this.success = false;
+        this.message = message;
     }
     public BaseResult(boolean success,String message){
         this.success = success;

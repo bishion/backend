@@ -37,19 +37,19 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping("update.json")
-    public BaseResult<Void> update(@Valid  SysUser sysUser){
+    public BaseResult update(@Valid SysUser sysUser){
         BaseAssert.isTrue(sysUser.getId() == null,BaseExpMsgEnum.BASE_ID_NULL);
         sysUserService.update(sysUser);
         return buildSuccess();
     }
-    @RequestMapping("create.json")
-    public BaseResult<Void> create(@Valid SysUser sysUser){
-        BaseAssert.isTrue(StringUtils.isBlank(sysUser.getPassword())||sysUser.getId()==null,BaseExpMsgEnum.BASE_PARAM_ERROR);
-        sysUserService.create(sysUser);
+    @RequestMapping("insert.json")
+    public BaseResult insert(@Valid SysUser sysUser){
+        sysUser.setOperator(getLoginName());
+        sysUserService.insert(sysUser);
         return buildSuccess();
     }
     @RequestMapping("delete.json")
-    public BaseResult<Void> delete(int id){
+    public BaseResult delete(int id){
         BaseAssert.isTrue(id == 0,BaseExpMsgEnum.BASE_PARAM_ERROR);
         sysUserService.delete(id,getLoginName());
         return buildSuccess();

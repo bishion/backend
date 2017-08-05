@@ -7,14 +7,14 @@
         <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="creator" property="creator" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createDate" jdbcType="TIME"/>
+        <result column="create_time" property="createTime" jdbcType="TIME"/>
         <result column="modifier" property="modifier" jdbcType="VARCHAR"/>
         <result column="modify_time" property="modifyTime" jdbcType="TIME"/>
         <result column="valid_flag" property="validFlag" jdbcType="TINYINT"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="create" parameterType="SysUser">
+    <insert id="insert" parameterType="SysUser">
         INSERT into sys_user(id,login_name,password,username,creator,create_time,modifier,modify_time,valid_flag,remark)
         VALUES(null,#{loginName},#{password},#{username},#{operator},now(),#{operator},now(),1,#{remark})
     </insert>
@@ -45,7 +45,7 @@
         limit #{start},#{limit}
     </select>
     <select id="count" parameterType="SysUserCond" resultType="java.lang.Integer">
-        select count(1) from bug_report
+        select count(1) from sys_user
         <include refid="queryCond"/>
     </select>
     <update id="update" parameterType="SysUser">

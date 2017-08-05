@@ -1,8 +1,13 @@
 package com.bizi.backend.bases;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Collections;
 import java.util.List;
 
+@Getter
+@Setter
 public class PageDTO<T> extends BaseResult{
     // 分页专用
     private List<T> rows = Collections.EMPTY_LIST;
