@@ -7,7 +7,7 @@
         <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="creator" property="creator" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIME"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
         <result column="modifier" property="modifier" jdbcType="VARCHAR"/>
         <result column="modify_time" property="modifyTime" jdbcType="TIME"/>
         <result column="valid_flag" property="validFlag" jdbcType="TINYINT"/>

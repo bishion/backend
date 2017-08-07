@@ -47,7 +47,9 @@ $(function () {
             }},
             {field: "lastLoginTime", title: '上次登录时间'},
             {field: "lastLoginIp", title: '上次登录IP'},
-            {field: "createTime", title: '创建时间'},
+            {field: "createTime", title: '创建时间',formatter:function (val) {
+                return dateTimeFormatter(val)
+            }},
             {field: "creator", title: '创建人'}
         ]],
         onLoadSuccess:function (data) {
