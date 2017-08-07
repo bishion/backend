@@ -49,9 +49,9 @@ public class BackendConfiguration extends WebMvcConfigurerAdapter{
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         VFS.addImplClass(SpringBootVFS.class);
         SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+       /* org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setAutoMappingBehavior(AutoMappingBehavior.NONE);
-        fb.setConfiguration(configuration);
+        fb.setConfiguration(configuration);*/
         fb.setDataSource(dataSource);//指定数据源(这个必须有，否则报错)
         //下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
         fb.setTypeAliasesPackage("com.bizi.backend.permit");//指定基包,不支持通配符
