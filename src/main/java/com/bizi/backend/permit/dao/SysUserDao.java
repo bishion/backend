@@ -22,4 +22,7 @@ public interface SysUserDao {
 
     @Update("update sys_user set valid_flag=0,modify_time=now(),modifier=#{operator}")
     void delete(@Param("id") int id,@Param("operator")String operator);
+
+    @Update("update sys_user set last_login_ip=#{lastLoginIp},last_login_time=now() where id=#{id}")
+    void updateLoginInfo(SysUser sysUser);
 }

@@ -58,6 +58,11 @@
             <artifactId>commons-codec</artifactId>
             <version>20041127.091804</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

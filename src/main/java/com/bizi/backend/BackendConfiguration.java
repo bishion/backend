@@ -1,6 +1,9 @@
 package com.bizi.backend;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.bizi.backend.framework.EventBusListener;
+import com.google.common.eventbus.AsyncEventBus;
+import com.google.common.eventbus.EventBus;
 import org.apache.ibatis.io.VFS;
 import org.apache.ibatis.session.AutoMappingBehavior;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -8,6 +11,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -62,6 +66,22 @@ public class BackendConfiguration extends WebMvcConfigurerAdapter{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SecurityInterceptor()).excludePathPatterns("/login/*","/error","/commonTask/*");
+    }
+    @Bean
+    public ThreadPoolTaskExecutor threadPoolTaskExecutor(){
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setCorePoolSize(10);
+        threadPoolTaskExecutor.setMaxPoolSize(50);
+        threadPoolTaskExecutor.setQueueCapacity(1000);
+        threadPoolTaskExecutor.setKeepAliveSeconds(300);
+        return threadPoolTaskExecutor;
+    }
+    @Bean
+    @ConditionalOnMissingBean
+    public AsyncEventBus asyncEventBus(EventBusListener eventBusListener,ThreadPoolTaskExecutor threadPoolTaskExecutor){
+        AsyncEventBus asyncEventBus = new AsyncEventBus(threadPoolTaskExecutor);
+        asyncEventBus.register(eventBusListener);
+        return asyncEventBus;
     }
   /*  @Bean
     public RequestContextListener requestContextListener(){

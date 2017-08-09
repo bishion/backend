@@ -7,11 +7,13 @@
         <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="creator" property="creator" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="modifier" property="modifier" jdbcType="VARCHAR"/>
-        <result column="modify_time" property="modifyTime" jdbcType="TIME"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
         <result column="valid_flag" property="validFlag" jdbcType="TINYINT"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="insert" parameterType="SysUser">
@@ -49,7 +51,7 @@
         <include refid="queryCond"/>
     </select>
     <update id="update" parameterType="SysUser">
-        update bug_report
+        update sys_user
         <set>
             <if test="validFlag!=null">
                 type=#{type},
@@ -59,6 +61,12 @@
             </if>
             <if test="loginName!=null">
                 login_name=#{loginName},
+            </if>
+            <if test="lastLoginIp!=null">
+                last_login_ip=#{lastLoginIp},
+            </if>
+            <if test="lastLoginTime!=null">
+                last_login_time=now(),
             </if>
             <if test="remark!=null">
                 remark=#{remark},

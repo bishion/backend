@@ -27,7 +27,7 @@ public class UserController extends BaseController {
     @RequestMapping("login.json")
     public SysUser login(String loginName,String password){
         BaseAssert.isTrue(StringUtils.isAnyBlank(loginName,password), BaseExpMsgEnum.BASE_PARAM_ERROR);
-        sysUserService.login(loginName,password);
+        sysUserService.login(loginName,password,getRequestIp());
 
         return new SysUser();
     }

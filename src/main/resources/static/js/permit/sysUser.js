@@ -36,8 +36,6 @@ $(function () {
         columns: [[
             {field: "username", title: '用户名'},
             {field: "validFlag", title: '状态',formatter:function (val, rec) {
-                console.log(val);
-                console.log(rec);
                 if(val == 1){
                     return "有效";
                 }else{
