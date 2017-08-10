@@ -1,5 +1,6 @@
 package com.bizi.backend.permit.controller;
 
+import com.bizi.backend.audit.Audit;
 import com.bizi.backend.bases.BaseAssert;
 import com.bizi.backend.bases.BaseExpMsgEnum;
 import com.bizi.backend.bases.BaseResult;
@@ -25,11 +26,10 @@ public class UserController extends BaseController {
     private SysUserService sysUserService;
 
     @RequestMapping("login.json")
+    @Audit
     public SysUser login(String loginName,String password){
         BaseAssert.isTrue(StringUtils.isAnyBlank(loginName,password), BaseExpMsgEnum.BASE_PARAM_ERROR);
-        sysUserService.login(loginName,password,getRequestIp());
-
-        return new SysUser();
+        return sysUserService.login(loginName,password,getRequestIp());
     }
     @RequestMapping("query.json")
     public PageDTO<SysUser> query(SysUserCond cond){
