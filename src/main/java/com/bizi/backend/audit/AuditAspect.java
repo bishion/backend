@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConditionalOnProperty(value = "bizi.config.audit.enabled")
 public class AuditAspect {
+
 
     @Around(value = "@annotation(audit)", argNames = "joinPoint,audit")
     public Object handleAudit(final ProceedingJoinPoint joinPoint, final Audit audit) throws Throwable {
