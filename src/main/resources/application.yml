@@ -3,3 +3,8 @@ application:
 spring:
   profiles:
     active: dev
+audit:
+  config:
+    enabled: true
+    urlPatterns: '*.json'
+    system: bizi

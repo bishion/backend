@@ -1,4 +1,4 @@
-package com.bizi.backend.audit;
+package com.bizi.audit;
 
 /**
  * Created by guo on 16-11-6.

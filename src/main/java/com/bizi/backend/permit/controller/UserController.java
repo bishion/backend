@@ -1,6 +1,7 @@
 package com.bizi.backend.permit.controller;
 
-import com.bizi.backend.audit.Audit;
+import com.bizi.audit.Audit;
+import com.bizi.audit.AuditAutoConfiguration;
 import com.bizi.backend.bases.BaseAssert;
 import com.bizi.backend.bases.BaseExpMsgEnum;
 import com.bizi.backend.bases.BaseResult;
@@ -24,9 +25,11 @@ import javax.validation.Valid;
 public class UserController extends BaseController {
     @Resource
     private SysUserService sysUserService;
-
+//
+//    @Resource
+//    private AuditAutoConfiguration auditAutoConfiguration;
     @RequestMapping("login.json")
-    @Audit
+    @Audit(value = "value",resolver = "resolver",modelName = "model")
     public SysUser login(String loginName,String password){
         BaseAssert.isTrue(StringUtils.isAnyBlank(loginName,password), BaseExpMsgEnum.BASE_PARAM_ERROR);
         return sysUserService.login(loginName,password,getRequestIp());

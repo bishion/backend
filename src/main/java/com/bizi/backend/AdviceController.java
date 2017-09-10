@@ -15,10 +15,10 @@ public class AdviceController {
     public BaseResult handleBaseException(BaseException e){
         return new BaseResult(e.getExpMsg());
     }
-    @ExceptionHandler(Exception.class)
+   /* @ExceptionHandler(Exception.class)
     @ResponseBody
     public BaseResult handleException(Exception e){
         log.error("出现异常",e);
         return new BaseResult("未知异常,请联系管理员!");
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-package com.bizi.backend.audit;
+package com.bizi.audit;
 
 import javax.servlet.http.HttpServletRequest;
 
