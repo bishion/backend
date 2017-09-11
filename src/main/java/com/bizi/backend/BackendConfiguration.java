@@ -3,9 +3,7 @@ package com.bizi.backend;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.bizi.backend.framework.EventBusListener;
 import com.google.common.eventbus.AsyncEventBus;
-import com.google.common.eventbus.EventBus;
 import org.apache.ibatis.io.VFS;
-import org.apache.ibatis.session.AutoMappingBehavior;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -16,8 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -87,15 +83,6 @@ public class BackendConfiguration extends WebMvcConfigurerAdapter{
     public RequestContextListener requestContextListener(){
         RequestContextListener requestContextListener = new RequestContextListener();
         return requestContextListener;
-    }
-    @Bean
-    public ThreadPoolTaskExecutor threadPoolTaskExecutor(){
-        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-        threadPoolTaskExecutor.setCorePoolSize(10);
-        threadPoolTaskExecutor.setMaxPoolSize(50);
-        threadPoolTaskExecutor.setQueueCapacity(1000);
-        threadPoolTaskExecutor.setKeepAliveSeconds(300);
-        return threadPoolTaskExecutor;
     }
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean(){
